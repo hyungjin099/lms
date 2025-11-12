@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.lms.cls.mapper.ClassMapper">
+    <resultMap id="classRoomMap" type="com.green.lms.cls.vo.ClassRoomVO">
+        <id property="classRoomNum" column="CLASS_ROOM_NUM"/>
+        <result property="roomName" column="ROOM_NAME"/>
+    </resultMap>
+
+    <resultMap id="classInfoMap" type="com.green.lms.cls.vo.ClassInfoVO">
+        <id property="classNum"             column="CLASS_NUM"/>
+        <result property="className"        column="CLASS_NAME"/>
+        <result property="jobClass"         column="JOB_CLASS"/>
+        <result property="classType"        column="CLASS_TYPE"/>
+        <result property="startDate"        column="START_DATE"/>
+        <result property="endDate"          column="END_DATE"/>
+        <result property="totalStudyDay"    column="TOTAL_STUDY_DAY"/>
+        <result property="classStatus"      column="CLASS_STATUS"/>
+        <result property="classQuota"       column="CLASS_QUOTA"/>
+        <result property="confirmStuCnt"    column="CONFIRM_STU_CNT"/>
+        <result property="joinStuCnt"       column="JOIN_STU_CNT"/>
+        <result property="dropStuCnt"       column="DROP_STU_CNT"/>
+        <result property="completeStuCnt"   column="COMPLETE_STU_CNT"/>
+        <result property="earlyCompleteCnt" column="EARLY_COMPLETE_CNT"/>
+        <result property="earlyEmployCnt"   column="EARLY_EMPLOY_CNT"/>
+        <result property="recruitRate"      column="RECRUIT_RATE"/>
+        <result property="staffNum"         column="STAFF_NUM"/>
+        <result property="classComment"     column="CLASS_COMMENT"/>
+    </resultMap>
+
+    <resultMap id="classOperInfoMap" type="com.green.lms.cls.vo.ClassOperInfoVO">
+        <id property="classOperNum"     column="CLASS_OPER_NUM"/>
+        <result property="staffNum"     column="STAFF_NUM"/>
+        <result property="classRoomNum"    column="CLASS_ROOM_NUM"/>
+        <result property="studyDay"     column="STUDY_DAY"/>
+        <result property="startTime"    column="START_TIME"/>
+        <result property="endTime"      column="END_TIME"/>
+        <result property="classNum"     column="CLASS_NUM"/>
+        <result property="isUsing"      column="IS_USING"/>
+
+        <association property="staffVO" resultMap="com.green.lms.staff.mapper.StaffMapper.staffMap"/>
+        <association property="classInfoVO" resultMap="classInfoMap"/>
+        <association property="classRoomVO" resultMap="classRoomMap"/>
+    </resultMap>
+    
+    
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
