@@ -4,17 +4,25 @@
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
 <mapper namespace="com.green.lms.staff.mapper.StaffMapper">
-    <resultMap id="staffMap" type="com.green.lms.staff.vo.StaffVO">
-        <id property="staffNum"         column="STAFF_NUM"/>
-        <result property="staffName"    column="STAFF_NAME"/>
-        <result property="staffTel"     column="STAFF_TEL"/>
-        <result property="staffEmail"   column="STAFF_EMAIL"/>
-        <result property="staffRole"    column="STAFF_ROLE"/>
-        <result property="staffJob"     column="STAFF_JOB"/>
-        <result property="staffTask"    column="STAFF_TASK"/>
-        <result property="staffStatus"  column="STAFF_STATUS"/>
-        <result property="joinDate"     column="JOIN_DATE"/>
-    </resultMap>
+  <resultMap id="staffMap" type="com.green.lms.staff.vo.StaffVO">
+    <id     column="STAFF_NUM"    property="staffNum"/>
+    <result column="STAFF_NAME"   property="staffName"/>
+    <result column="STAFF_TEL"    property="staffTel"/>
+    <result column="STAFF_EMAIL"  property="staffEmail"/>
+    <result column="STAFF_ROLE"   property="staffRole"/>
+    <result column="STAFF_JOB"    property="staffJob"/>
+    <result column="STAFF_TASK"   property="staffTask"/>
+    <result column="STAFF_STATUS" property="staffStatus"/>
+    <result column="JOIN_DATE"    property="joinDate"/>
+    <result column="STAFF_ORDER"  property="staffOrder"/>
+  </resultMap>
+
+  <select id="getAll" resultMap="staffMap">
+    SELECT *
+    FROM STAFF_INFO
+    WHERE STAFF_TASK = '강사'
+    ORDER BY STAFF_ORDER
+  </select>
 
     
 </mapper>

@@ -4,49 +4,102 @@
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
 <mapper namespace="com.green.lms.cls.mapper.ClassMapper">
-    <resultMap id="classRoomMap" type="com.green.lms.cls.vo.ClassRoomVO">
-        <id property="classRoomNum" column="CLASS_ROOM_NUM"/>
-        <result property="roomName" column="ROOM_NAME"/>
-    </resultMap>
+  <resultMap id="classInfoMap" type="com.green.lms.cls.vo.ClassInfoVO">
+    <id column="CLASS_NUM"              property="classNum"/>
+    <result column="CLASS_NAME"         property="className"/>
+    <result column="JOB_NUM"            property="jobNum"/>
+    <result column="CLASS_TYPE_NUM"     property="classTypeNum"/>
+    <result column="START_DATE"         property="startDate"/>
+    <result column="END_DATE"           property="endDate"/>
+    <result column="TOTAL_STUDY_DAY"    property="totalStudyDay"/>
+    <result column="CLASS_STATUS"       property="classStatus"/>
+    <result column="CLASS_QUOTA"        property="classQuota"/>
+    <result column="CONFIRM_STU_CNT"    property="confirmStuCnt"/>
+    <result column="JOIN_STU_CNT"       property="joinStuCnt"/>
+    <result column="DROP_STU_CNT"       property="dropStuCnt"/>
+    <result column="COMPLETE_STU_CNT"   property="completeStuCnt"/>
+    <result column="EARLY_COMPLETE_CNT" property="earlyCompleteCnt"/>
+    <result column="EARLY_EMPLOY_CNT"   property="earlyEmployCnt"/>
+    <result column="RECRUIT_RATE"       property="recruitRate"/>
+    <result column="CLASS_COMMENT"      property="classComment"/>
+    <result column="CREATE_USER"        property="createUser"/>
+    <result column="UPDATE_USER"        property="updateUser"/>
+    <result column="CREATE_DATE"        property="createDate"/>
+    <result column="UPDATE_DATE"        property="updateDate"/>
 
-    <resultMap id="classInfoMap" type="com.green.lms.cls.vo.ClassInfoVO">
-        <id property="classNum"             column="CLASS_NUM"/>
-        <result property="className"        column="CLASS_NAME"/>
-        <result property="jobClass"         column="JOB_CLASS"/>
-        <result property="classType"        column="CLASS_TYPE"/>
-        <result property="startDate"        column="START_DATE"/>
-        <result property="endDate"          column="END_DATE"/>
-        <result property="totalStudyDay"    column="TOTAL_STUDY_DAY"/>
-        <result property="classStatus"      column="CLASS_STATUS"/>
-        <result property="classQuota"       column="CLASS_QUOTA"/>
-        <result property="confirmStuCnt"    column="CONFIRM_STU_CNT"/>
-        <result property="joinStuCnt"       column="JOIN_STU_CNT"/>
-        <result property="dropStuCnt"       column="DROP_STU_CNT"/>
-        <result property="completeStuCnt"   column="COMPLETE_STU_CNT"/>
-        <result property="earlyCompleteCnt" column="EARLY_COMPLETE_CNT"/>
-        <result property="earlyEmployCnt"   column="EARLY_EMPLOY_CNT"/>
-        <result property="recruitRate"      column="RECRUIT_RATE"/>
-        <result property="staffNum"         column="STAFF_NUM"/>
-        <result property="classComment"     column="CLASS_COMMENT"/>
-    </resultMap>
+    <association property="jobTypeVO"   resultMap="com.green.lms.job_type.mapper.JobTypeMapper.jobTypeMap"/>
+    <association property="classTypeVO" resultMap="com.green.lms.class_type.mapper.ClassTypeMapper.classTypeMap"/>
 
-    <resultMap id="classOperInfoMap" type="com.green.lms.cls.vo.ClassOperInfoVO">
-        <id property="classOperNum"     column="CLASS_OPER_NUM"/>
-        <result property="staffNum"     column="STAFF_NUM"/>
-        <result property="classRoomNum"    column="CLASS_ROOM_NUM"/>
-        <result property="studyDay"     column="STUDY_DAY"/>
-        <result property="startTime"    column="START_TIME"/>
-        <result property="endTime"      column="END_TIME"/>
-        <result property="classNum"     column="CLASS_NUM"/>
-        <result property="isUsing"      column="IS_USING"/>
+  </resultMap>
 
-        <association property="staffVO" resultMap="com.green.lms.staff.mapper.StaffMapper.staffMap"/>
-        <association property="classInfoVO" resultMap="classInfoMap"/>
-        <association property="classRoomVO" resultMap="classRoomMap"/>
-    </resultMap>
-    
-    
+  <resultMap id="classOperInfoMap" type="com.green.lms.cls.vo.ClassOperInfoVO">
+    <id column="CLASS_OPER_NUM"     property="classOperNum"/>
+    <result column="STAFF_NUM"      property="staffNum"/>
+    <result column="CLASS_ROOM_NUM" property="classRoomNum"/>
+    <result column="STUDY_DAY"      property="studyDay"/>
+    <result column="START_TIME"     property="startTime"/>
+    <result column="END_TIME"       property="endTime"/>
+    <result column="CLASS_NUM"      property="classNum"/>
+    <result column="IS_USING"       property="isUsing"/>
+    <result column="CREATE_USER"    property="createUser"/>
+    <result column="UPDATE_USER"    property="updateUser"/>
+    <result column="CREATE_DATE"    property="createDate"/>
+    <result column="UPDATE_DATE"    property="updateDate"/>
+
+    <association property="staffVO"     resultMap="com.green.lms.staff.mapper.StaffMapper.staffMap"/>
+    <association property="classInfoVO" resultMap="classInfoMap"/>
+    <association property="classRoomVO" resultMap="com.green.lms.class_room.mapper.ClassRoomMapper.classRoomMap"/>
+  </resultMap>
+
+  <select id="getNextClassNum" resultType="int">
+    SELECT IFNULL(MAX(CLASS_NUM), 0) + 1 FROM CLASS_INFO
+  </select>
+
+  <insert id="insertClassInfo">
+    INSERT INTO CLASS_INFO (
+      CLASS_NAME
+      , JOB_NUM
+      , CLASS_TYPE_NUM
+      , START_DATE
+      , END_DATE
+      , TOTAL_STUDY_DAY
+      , CLASS_QUOTA
+      , CLASS_COMMENT
+    ) VALUES (
+      #{className}
+      , #{jobNum}
+      , #{classTypeNum}
+      , #{startDate}
+      , #{endDate}
+      , #{totalStudyDay}
+      , #{classQuota}
+      , #{classComment}
+    )
+  </insert>
+
+  <insert id="insertClassOperInfo">
+    INSERT INTO CLASS_OPER_INFO (
+      STAFF_NUM
+      , CLASS_ROOM_NUM
+      , STUDY_DAY
+      , STUDY_HOUR
+      , START_TIME
+      , END_TIME
+      , CLASS_NUM
+    ) VALUES (
+      #{staffNum}
+      , #{classRoomNum}
+      , #{studyDayString}
+      , #{studyHour}
+      , #{startTime}
+      , #{endTime}
+      , #{classNum}
+    )
+  </insert>
+
+
 </mapper>
+
 
 
 
