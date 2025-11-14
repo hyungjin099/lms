@@ -21,6 +21,7 @@ public class ClassService {
         classVoForInsert.setDaysToString();
         int nextClassNum = classMapper.getNextClassNum();
         classVoForInsert.setClassNum(nextClassNum);
+        classVoForInsert.setCreateUser("admin");
         classMapper.insertClassInfo(classVoForInsert);
         classMapper.insertClassOperInfo(classVoForInsert);
       }catch (Exception e){

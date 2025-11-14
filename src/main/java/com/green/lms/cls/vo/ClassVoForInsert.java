@@ -21,12 +21,13 @@ public class ClassVoForInsert {
   private LocalDate startDate;
   private LocalDate endDate;
   private int staffNum;
-  private LocalTime startTime;
-  private LocalTime endTime;
+  private String startTime;
+  private String endTime;
   private String[] studyDay;
   private String classComment;
   private int classNum;
   private String studyDayString;
+  private String createUser;
 
   //배열을 문자열로 반환
   public void setDaysToString(){

@@ -65,6 +65,7 @@
       , TOTAL_STUDY_DAY
       , CLASS_QUOTA
       , CLASS_COMMENT
+      , CREATE_USER
     ) VALUES (
       #{className}
       , #{jobNum}
@@ -74,6 +75,7 @@
       , #{totalStudyDay}
       , #{classQuota}
       , #{classComment}
+      , #{createUser}
     )
   </insert>
 
@@ -86,6 +88,7 @@
       , START_TIME
       , END_TIME
       , CLASS_NUM
+      , CREATE_USER
     ) VALUES (
       #{staffNum}
       , #{classRoomNum}
@@ -94,6 +97,7 @@
       , #{startTime}
       , #{endTime}
       , #{classNum}
+      , #{createUser}
     )
   </insert>
 
