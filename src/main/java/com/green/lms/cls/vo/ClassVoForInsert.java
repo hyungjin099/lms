@@ -17,6 +17,7 @@ public class ClassVoForInsert {
   private String className;
   private int classQuota;
   private int totalStudyDay;
+  private int totalStudyHour;
   private int studyHour;
   private LocalDate startDate;
   private LocalDate endDate;

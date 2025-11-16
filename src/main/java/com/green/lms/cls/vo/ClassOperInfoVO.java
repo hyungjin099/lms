@@ -10,7 +10,7 @@ import java.time.LocalTime;
 @Setter
 @Getter
 @ToString
-@AllArgsConstructor
+
 public class ClassOperInfoVO extends CreationVO {
   private int classOperNum;     // 운영정보 번호
   private int staffNum;         // 담당강사 번호 (FK)

@@ -6,8 +6,7 @@ import lombok.*;
 
 @Getter
 @Setter
-@ToString(callSuper = true)
-@AllArgsConstructor
+@ToString
 public class ClassTypeVO extends CreationVO {
   private int classTypeNum;
   private String classTypeName;

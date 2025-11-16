@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@AllArgsConstructor
+
 public class ClassInfoVO extends CreationVO {
   private int classNum;             // 과정번호
   private String className;         // 과정명
@@ -19,6 +19,7 @@ public class ClassInfoVO extends CreationVO {
   private LocalDate startDate;      // 시작일
   private LocalDate endDate;        // 종료일
   private int totalStudyDay;        // 수업일수
+  private int totalStudyHour;        // 전체수업시간
   private String classStatus;       // 과정상태 (시작 전, 진행 중, 종료)
   private int classQuota;           // 모집정원
   private int confirmStuCnt;        // 실시인원

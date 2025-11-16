@@ -12,6 +12,7 @@
     <result column="START_DATE"         property="startDate"/>
     <result column="END_DATE"           property="endDate"/>
     <result column="TOTAL_STUDY_DAY"    property="totalStudyDay"/>
+    <result column="TOTAL_STUDY_HOUR"   property="totalStudyHour"/>
     <result column="CLASS_STATUS"       property="classStatus"/>
     <result column="CLASS_QUOTA"        property="classQuota"/>
     <result column="CONFIRM_STU_CNT"    property="confirmStuCnt"/>
@@ -63,6 +64,7 @@
       , START_DATE
       , END_DATE
       , TOTAL_STUDY_DAY
+      , TOTAL_STUDY_HOUR
       , CLASS_QUOTA
       , CLASS_COMMENT
       , CREATE_USER
@@ -73,6 +75,7 @@
       , #{startDate}
       , #{endDate}
       , #{totalStudyDay}
+      , #{totalStudyHour}
       , #{classQuota}
       , #{classComment}
       , #{createUser}
@@ -100,6 +103,35 @@
       , #{createUser}
     )
   </insert>
+
+  <!--모집중인 과정 정보 조회-->
+  <select id="getClassListRecruiting" resultMap="classOperInfoMap">
+    SELECT CI.CLASS_NUM
+      , CLASS_NAME
+      , JOB_NUM
+      , (SELECT JOB_NAME FROM job_type WHERE JOB_NUM = CI.JOB_NUM) AS JOB_NAME
+      , CLASS_TYPE_NUM
+      , (SELECT CLASS_TYPE_NAME FROM class_type WHERE CLASS_TYPE_NUM = CI.CLASS_TYPE_NUM) AS CLASS_TYPE_NAME
+      , START_DATE
+      , END_DATE
+      , TOTAL_STUDY_HOUR
+      , TOTAL_STUDY_DAY
+      , CLASS_QUOTA
+      , CONFIRM_STU_CNT
+      , RECRUIT_RATE
+      , STAFF_NUM
+      , (SELECT STAFF_NAME FROM staff_info WHERE STAFF_NUM = COI.STAFF_NUM) AS STAFF_NAME
+      , CLASS_ROOM_NUM
+      , (SELECT CLASS_ROOM_NAME FROM class_room WHERE CLASS_ROOM_NUM = COI.CLASS_ROOM_NUM) AS CLASS_ROOM_NAME
+      , STUDY_DAY
+      , STUDY_HOUR
+      , START_TIME
+      , END_TIME
+    FROM CLASS_INFO CI INNER JOIN class_oper_info COI
+    ON CI.CLASS_NUM = COI.CLASS_NUM
+    WHERE CLASS_STATUS = '모집 중'
+    AND IS_USING = 'Y';
+  </select>
 
 
 </mapper>

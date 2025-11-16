@@ -7,9 +7,7 @@ import lombok.*;
 //직종
 @Getter
 @Setter
-@ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
+@ToString
 public class JobTypeVO extends CreationVO {
   private int jobNum;
   private String jobName;

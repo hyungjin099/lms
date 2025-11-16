@@ -12,4 +12,7 @@ public interface ClassMapper {
   int getNextClassNum();
   void insertClassInfo(ClassVoForInsert classVoForInsert);
   void insertClassOperInfo(ClassVoForInsert classVoForInsert);
+
+  //모집중인 과정 정보 조회
+  List<ClassOperInfoVO> getClassListRecruiting();
 }

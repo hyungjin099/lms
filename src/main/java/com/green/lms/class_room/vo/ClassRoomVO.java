@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @Getter
 @ToString
-@AllArgsConstructor
+
 public class ClassRoomVO extends CreationVO {
     private int classRoomNum;    // 강의실 번호
     private String classRoomName;     // 강의실명

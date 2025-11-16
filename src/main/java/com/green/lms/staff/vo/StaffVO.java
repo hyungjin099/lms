@@ -8,7 +8,6 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@AllArgsConstructor
 public class StaffVO extends CreationVO {
   private int staffNum;           // 직원번호
   private String staffName;       // 직원명
