@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.lms.enroll.mapper.EnrollMapper">
+  <resultMap id="enrollMap" type="com.green.lms.enroll.vo.EnrollVO">
+    <id     column="ENROLL_NUM"   property="enrollNum"/>
+    <result column="CLASS_NUM"    property="classNum"/>
+    <result column="STU_NUM"      property="stuNum"/>
+    <result column="STU_STATUS"   property="stuStatus"/>
+    <result column="MANAGER_NUM"  property="managerNum"/>
+    <result column="CREATE_USER"  property="createUser"/>
+    <result column="UPDATE_USER"  property="updateUser"/>
+    <result column="CREATE_DATE"  property="createDate"/>
+    <result column="UPDATE_DATE"  property="updateDate"/>
+
+    <association property="stuVO" resultMap="com.green.lms.stu.mapper.StuMapper.stuMap" />
+    <association property="staffVO" resultMap="com.green.lms.staff.mapper.StaffMapper.staffMap" column="MANAGER_NUM"/>
+    <collection property="classInfoVO" resultMap="com.green.lms.cls.mapper.ClassMapper.classInfoMap" />
+  </resultMap>
+
+  <!--훈련생 등록 시 기등록 훈련생 여부 판단을 위한 조회-->
+  <select id="getEnrollListForCheckDuplicate" resultMap="enrollMap">
+    SELECT ENROLL_NUM
+      , E.CLASS_NUM
+      , E.STU_NUM
+      , STU_NAME
+      , STU_BIRTHDAY
+      , STU_PHONE
+      , CLASS_NAME
+      , START_DATE
+      , END_DATE
+      , STU_STATUS
+    FROM ENROLL_INFO E INNER JOIN STU_INFO S
+    ON E.STU_NUM = S.STU_NUM
+    INNER JOIN CLASS_INFO C
+    ON E.CLASS_NUM = C.CLASS_NUM
+    WHERE STU_NAME = #{stuName}
+    AND STU_BIRTHDAY = #{stuBirthday}
+  </select>
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

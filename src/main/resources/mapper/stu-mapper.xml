@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.lms.stu.mapper.StuMapper">
+  <resultMap id="stuMap" type="com.green.lms.stu.vo.StuVO">
+    <id     column="STU_NUM"      property="stuNum"/>
+    <result column="STU_NAME"     property="stuName"/>
+    <result column="STU_BIRTHDAY" property="stuBirthday"/>
+    <result column="STU_PHONE"    property="stuPhone"/>
+    <result column="STU_COMMENT"  property="stuComment"/>
+    <result column="CREATE_USER"  property="createUser"/>
+    <result column="UPDATE_USER"  property="updateUser"/>
+    <result column="CREATE_DATE"  property="createDate"/>
+    <result column="UPDATE_DATE"  property="updateDate"/>
+  </resultMap>
+
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

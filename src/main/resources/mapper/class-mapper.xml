@@ -38,6 +38,7 @@
     <result column="STAFF_NUM"      property="staffNum"/>
     <result column="CLASS_ROOM_NUM" property="classRoomNum"/>
     <result column="STUDY_DAY"      property="studyDay"/>
+    <result column="STUDY_HOUR"      property="studyHour"/>
     <result column="START_TIME"     property="startTime"/>
     <result column="END_TIME"       property="endTime"/>
     <result column="CLASS_NUM"      property="classNum"/>
