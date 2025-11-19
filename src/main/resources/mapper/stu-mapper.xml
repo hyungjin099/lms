@@ -9,13 +9,33 @@
     <result column="STU_NAME"     property="stuName"/>
     <result column="STU_BIRTHDAY" property="stuBirthday"/>
     <result column="STU_PHONE"    property="stuPhone"/>
-    <result column="STU_COMMENT"  property="stuComment"/>
     <result column="CREATE_USER"  property="createUser"/>
     <result column="UPDATE_USER"  property="updateUser"/>
     <result column="CREATE_DATE"  property="createDate"/>
     <result column="UPDATE_DATE"  property="updateDate"/>
   </resultMap>
 
+  <!--신규 등록 학생번호 조회-->
+  <select id="selectNextStuNum" resultType="int">
+    SELECT IFNULL(MAX(STU_NUM), 0) + 1 FROM STU_INFO
+  </select>
+
+  <!--신규 학생 등록-->
+  <insert id="insertNewStu">
+    INSERT INTO STU_INFO (
+      STU_NUM
+      , STU_NAME
+      , STU_BIRTHDAY
+      , STU_PHONE
+      , CREATE_USER
+    ) VALUES (
+      #{stuNum}
+      , #{stuName}
+      , #{stuBirthday}
+      , #{stuPhone}
+      , 'admin'
+    )
+  </insert>
 
 
 

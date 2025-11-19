@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
+<mapper namespace="com.green.lms.consult.mapper.ConsultMapper">
+  <resultMap id="consultMap" type="com.green.lms.consult.vo.ConsultVO">
+    <id column="CONSULT_NUM"          property="consultNum"/>
+    <result column="STU_NUM"          property="stuNum"/>
+    <result column="MANAGER_NUM"      property="managerNum"/>
+    <result column="CONSULT_CONTENT"  property="consultContent"/>
+    <result column="CLASS_NUM"        property="classNum"/>
+    <result column="CONSULT_STATUS"   property="consultStatus"/>
+    <result column="CONSULT_TYPE"     property="consultType"/>
+    <result column="HRD_STATUS"       property="hrdStatus"/>
+    <result column="CONSULT_GRADE"    property="consultGrade"/>
+    <result column="OPTION1"          property="option1"/>
+    <result column="OPTION2"          property="option2"/>
+    <result column="OPTION3"          property="option3"/>
+    <result column="OPTION4"          property="option4"/>
+    <result column="OPTION5"          property="option5"/>
+    <result column="USE_OPTION1"      property="useOption1"/>
+    <result column="USE_OPTION2"      property="useOption2"/>
+    <result column="USE_OPTION3"      property="useOption3"/>
+    <result column="USE_OPTION4"      property="useOption4"/>
+    <result column="USE_OPTION5"      property="useOption5"/>
+    <result column="ATTITUDE_SCORE"   property="attitudeScore"/>
+    <result column="ATTENDANCE_SCORE" property="attendanceScore"/>
+    <result column="MIND_SCORE"       property="mindScore"/>
+    <result column="JOB_SCORE"        property="jobScore"/>
+    <result column="TOTAL_SCORE"      property="totalScore"/>
+    <result column="CREATE_USER"      property="createUser"/>
+    <result column="UPDATE_USER"      property="updateUser"/>
+    <result column="CREATE_DATE"      property="createDate"/>
+    <result column="UPDATE_DATE"      property="updateDate"/>
+
+    <association property="stuVO" resultMap="com.green.lms.stu.mapper.StuMapper.stuMap" />
+    <association property="staffVO" resultMap="com.green.lms.staff.mapper.StaffMapper.staffMap" column="MANAGER_NUM"/>
+    <association property="classInfoVO" resultMap="com.green.lms.cls.mapper.ClassMapper.classInfoMap" />
+  </resultMap>
+
+  <insert id="insertConsult">
+    INSERT INTO CONSULT_INFO (
+      STU_NUM
+      , MANAGER_NUM
+      , CLASS_NUM
+      , CREATE_USER
+      , OPTION1
+      , OPTION2
+      , OPTION3
+      , OPTION4
+      , OPTION5
+      , USE_OPTION1
+      , USE_OPTION2
+      , USE_OPTION3
+      , USE_OPTION4
+      , USE_OPTION5
+    )
+    SELECT
+      #{stuNum}
+      , #{managerNum}
+      , #{classNum}
+      , 'admin'
+
+      , CASE
+        WHEN (SELECT OPTION1 FROM CONSULT_INFO WHERE CLASS_NUM = #{classNum} LIMIT 1) IS NULL
+        THEN NULL
+        ELSE SUBSTRING_INDEX(
+        (SELECT OPTION1 FROM CONSULT_INFO WHERE CLASS_NUM = #{classNum} LIMIT 1), ':', 1
+        )
+        END
+
+      , CASE
+        WHEN (SELECT OPTION2 FROM CONSULT_INFO WHERE CLASS_NUM = #{classNum} LIMIT 1) IS NULL
+        THEN NULL
+        ELSE SUBSTRING_INDEX(
+        (SELECT OPTION2 FROM CONSULT_INFO WHERE CLASS_NUM = #{classNum} LIMIT 1), ':', 1
+        )
+        END
+
+      , CASE
+        WHEN (SELECT OPTION3 FROM CONSULT_INFO WHERE CLASS_NUM = #{classNum} LIMIT 1) IS NULL
+        THEN NULL
+        ELSE SUBSTRING_INDEX(
+        (SELECT OPTION3 FROM CONSULT_INFO WHERE CLASS_NUM = #{classNum} LIMIT 1), ':', 1
+        )
+        END
+
+      , CASE
+        WHEN (SELECT OPTION4 FROM CONSULT_INFO WHERE CLASS_NUM = #{classNum} LIMIT 1) IS NULL
+        THEN NULL
+        ELSE SUBSTRING_INDEX(
+        (SELECT OPTION4 FROM CONSULT_INFO WHERE CLASS_NUM = #{classNum} LIMIT 1), ':', 1
+        )
+        END
+
+      , CASE
+        WHEN (SELECT OPTION5 FROM CONSULT_INFO WHERE CLASS_NUM = #{classNum} LIMIT 1) IS NULL
+        THEN NULL
+        ELSE SUBSTRING_INDEX(
+        (SELECT OPTION5 FROM CONSULT_INFO WHERE CLASS_NUM = #{classNum} LIMIT 1), ':', 1
+        )
+        END
+
+      , CASE WHEN EXISTS (SELECT 1 FROM CONSULT_INFO WHERE USE_OPTION1 = 'Y' AND CLASS_NUM = #{classNum} LIMIT 1) THEN 'Y' ELSE 'N' END
+      , CASE WHEN EXISTS (SELECT 1 FROM CONSULT_INFO WHERE USE_OPTION2 = 'Y' AND CLASS_NUM = #{classNum} LIMIT 1) THEN 'Y' ELSE 'N' END
+      , CASE WHEN EXISTS (SELECT 1 FROM CONSULT_INFO WHERE USE_OPTION3 = 'Y' AND CLASS_NUM = #{classNum} LIMIT 1) THEN 'Y' ELSE 'N' END
+      , CASE WHEN EXISTS (SELECT 1 FROM CONSULT_INFO WHERE USE_OPTION4 = 'Y' AND CLASS_NUM = #{classNum} LIMIT 1) THEN 'Y' ELSE 'N' END
+      , CASE WHEN EXISTS (SELECT 1 FROM CONSULT_INFO WHERE USE_OPTION5 = 'Y' AND CLASS_NUM = #{classNum} LIMIT 1) THEN 'Y' ELSE 'N' END
+  </insert>
+
+  <!--학생 등록 시 상담 이력 조회-->
+  <select id="selectConsultHistory" resultMap="consultMap">
+    SELECT CONSULT_NUM
+      , CI.STU_NUM
+      , STU_NAME
+      , STU_BIRTHDAY
+      , STU_PHONE
+      , CI.CLASS_NUM
+      , CLASS_NAME
+      , START_DATE
+      , END_DATE
+      , MANAGER_NUM
+      , STAFF_NAME
+      , CONSULT_CONTENT
+    FROM CONSULT_INFO CI INNER JOIN stu_info SI
+    ON CI.STU_NUM = SI.STU_NUM
+    INNER JOIN class_info CLS
+    ON CI.CLASS_NUM = CLS.CLASS_NUM
+    INNER JOIN staff_info STAFF
+    ON CI.MANAGER_NUM = STAFF.STAFF_NUM
+    WHERE STU_NAME = #{stuName}
+    AND STU_BIRTHDAY = #{stuBirthday}
+  </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

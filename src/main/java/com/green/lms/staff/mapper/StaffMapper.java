@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface StaffMapper {
-  List<StaffVO> getAll();
+  List<StaffVO> getAll(String staffTask);
 }

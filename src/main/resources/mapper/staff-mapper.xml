@@ -15,12 +15,15 @@
     <result column="STAFF_STATUS" property="staffStatus"/>
     <result column="JOIN_DATE"    property="joinDate"/>
     <result column="STAFF_ORDER"  property="staffOrder"/>
+    <result column="NICK_NAME"    property="nickName"/>
   </resultMap>
 
   <select id="getAll" resultMap="staffMap">
     SELECT *
     FROM STAFF_INFO
-    WHERE STAFF_TASK = '강사'
+    <if test='staffTask != null and !staffTask.equals("")'>
+    WHERE STAFF_TASK = #{staffTask}
+    </if>
     ORDER BY STAFF_ORDER
   </select>
 

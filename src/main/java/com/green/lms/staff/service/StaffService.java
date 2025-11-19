@@ -12,7 +12,7 @@ import java.util.List;
 public class StaffService {
   private final StaffMapper staffMapper;
 
-  public List<StaffVO> getAll(){
-    return staffMapper.getAll();
+  public List<StaffVO> getAll(String staffTask){
+    return staffMapper.getAll(staffTask);
   }
 }
