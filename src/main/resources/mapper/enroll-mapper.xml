@@ -36,8 +36,7 @@
     ON E.STU_NUM = S.STU_NUM
     INNER JOIN CLASS_INFO C
     ON E.CLASS_NUM = C.CLASS_NUM
-    WHERE STU_NAME = #{stuName}
-    AND STU_BIRTHDAY = #{stuBirthday}
+    WHERE E.STU_NUM = #{stuNum}
   </select>
 
 

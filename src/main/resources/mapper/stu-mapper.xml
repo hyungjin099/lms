@@ -37,6 +37,24 @@
     )
   </insert>
 
+  <!--학생 등록 시 중복 학생 체크를 위한 학생 목록 정보 조회-->
+  <select id="selectStuListForCheckDuplicate" resultMap="stuMap">
+    SELECT *
+    FROM STU_INFO
+    WHERE STU_NAME = #{stuName}
+    AND STU_BIRTHDAY = #{stuBirthday}
+  </select>
+
+  <!--연락처 수정-->
+  <update id="updateStuPhone">
+    UPDATE STU_INFO
+    SET
+      STU_PHONE = #{stuPhone}
+      , UPDATE_USER = 'ADMIN'
+      , UPDATE_DATE = SYSDATE()
+    WHERE STU_NUM = #{stuNum}
+  </update>
+
 
 
 

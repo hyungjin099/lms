@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,10 +20,10 @@ public class EnrollController {
   private final EnrollService enrollService;
 
   //훈련생 등록 시 기등록 훈련생 여부 판단을 위한 조회
-  @GetMapping("/list-for-check-duplicate")
-  public ResponseEntity<?> getEnrollListForCheckDuplicate(StuVO stuVO){
+  @GetMapping("/list-for-check-duplicate/{stuNum}")
+  public ResponseEntity<?> getEnrollListForCheckDuplicate(@PathVariable("stuNum") int stuNum){
     try {
-      List<EnrollVO> list = enrollService.getEnrollListForCheckDuplicate(stuVO);
+      List<EnrollVO> list = enrollService.getEnrollListForCheckDuplicate(stuNum);
       return ResponseEntity.status(HttpStatus.OK).body(list);
     }catch (Exception e){
       log.error("EnrollController - getEnrollListForCheckDuplicate error", e);

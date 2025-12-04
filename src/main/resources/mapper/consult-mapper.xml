@@ -129,8 +129,15 @@
     ON CI.CLASS_NUM = CLS.CLASS_NUM
     INNER JOIN staff_info STAFF
     ON CI.MANAGER_NUM = STAFF.STAFF_NUM
-    WHERE STU_NAME = #{stuName}
-    AND STU_BIRTHDAY = #{stuBirthday}
+    WHERE CI.STU_NUM = #{stuNum}
+  </select>
+
+  <!--동일 학생이 한 과정에 중복 상담 체크인지 확인-->
+  <select id="checkDuplicateConsult" resultType="String">
+    SELECT 'Y'
+    FROM CONSULT_INFO
+    WHERE STU_NUM = #{stuNum}
+    AND CLASS_NUM = #{classNum}
   </select>
 
 </mapper>

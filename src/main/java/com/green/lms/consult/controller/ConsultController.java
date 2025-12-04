@@ -31,13 +31,25 @@ public class ConsultController {
   }
 
   //신규 학생 등록 시 상담 이력 조회
-  @GetMapping("/history")
-  public ResponseEntity<?> getConsultHistory(ConsultVoForInsertStu consultVoForInsertStu){
+  @GetMapping("/history/{stuNum}")
+  public ResponseEntity<?> getConsultHistory(@PathVariable("stuNum") int stuNum){
     try{
-      List<ConsultVO> list = consultService.selectConsultHistory(consultVoForInsertStu);
+      List<ConsultVO> list = consultService.selectConsultHistory(stuNum);
       return ResponseEntity.status(HttpStatus.OK).body(list);
     }catch (Exception e){
       log.error("ConsultController - getConsultHistory error", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+  //동일 학생이 한 과정에 중복 상담 체크인지 확인
+  @GetMapping("/is-possible-add")
+  public ResponseEntity<?> isPossibleAdd(ConsultVoForInsertStu consultVoForInsertStu){
+    try{
+      boolean result = consultService.isPossibleAdd(consultVoForInsertStu);
+      return ResponseEntity.status(HttpStatus.OK).body(result);
+    }catch (Exception e){
+      log.error("ConsultController - isPossibleAdd error", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }

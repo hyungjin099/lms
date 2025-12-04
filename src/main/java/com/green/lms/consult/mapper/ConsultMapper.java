@@ -12,5 +12,8 @@ public interface ConsultMapper {
   void insertConsult(ConsultVoForInsertStu consultVoForInsertStu);
 
   //신규 상담 등록 시 상담 이력 조회
-  List<ConsultVO> selectConsultHistory(ConsultVoForInsertStu consultVoForInsertStu);
+  List<ConsultVO> selectConsultHistory(int stuNUm);
+
+  //동일 학생이 한 과정에 중복 상담 체크인지 확인
+  String checkDuplicateConsult(ConsultVoForInsertStu consultVoForInsertStu);
 }

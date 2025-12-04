@@ -15,4 +15,5 @@ public class ConsultVoForInsertStu extends CreationVO {
   private String stuBirthday;
   private int managerNum;
   private int classNum;
+  private String isDuplicate;
 }

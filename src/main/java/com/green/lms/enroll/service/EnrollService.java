@@ -14,7 +14,7 @@ public class EnrollService {
   private final EnrollMapper enrollMapper;
 
   //훈련생 등록 시 기등록 훈련생 여부 판단을 위한 조회
-  public List<EnrollVO> getEnrollListForCheckDuplicate(StuVO stuVO){
-    return enrollMapper.getEnrollListForCheckDuplicate(stuVO);
+  public List<EnrollVO> getEnrollListForCheckDuplicate(int stuNum){
+    return enrollMapper.getEnrollListForCheckDuplicate(stuNum);
   }
 }
