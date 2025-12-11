@@ -1,22 +1,48 @@
-package com.green.lms.consult.vo;
+package com.green.lms.cls.vo;
 
-import com.green.lms.cls.vo.ClassInfoVO;
-import com.green.lms.common.vo.CreationVO;
-import com.green.lms.staff.vo.StaffVO;
-import com.green.lms.stu.vo.StuVO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
+import java.time.LocalDate;
+import java.util.List;
+
 @Getter
+@Setter
 @ToString
-public class ConsultVO extends CreationVO {
+public class ClassVoForGetConsultList {
+  private Integer classNum;
+  private String className;
+  private Integer jobNum;
+  private String jobName;
+  private Integer classTypeNum;
+  private String classTypeName;
+  private LocalDate startDate;
+  private LocalDate endDate;
+  private Integer totalStudyHour;
+  private Integer totalStudyDay;
+  private Integer teacherNum;
+  private String teacherName;
+  private Integer classRoomNum;
+  private String classRoomName;
+  private String studyDay;
+  private Integer studyHour;
+  private String startTime;
+  private String endTime;
+
+  private List<ConsultVoForGetList> consultList;
+}
+
+@Getter
+@Setter
+@ToString
+class ConsultVoForGetList {
   private Integer consultNum;
   private Integer stuNum;
+  private String StuName;
   private Integer managerNum;
+  private String managerName;
   private String consultContent;
-  private Integer classNum;
   private String consultStatus;     // 상담중(불확실), 등록확정, 취소
   private String consultType;       // 실업자, 재직자
   private String supportType;       // 일반, 국1, 국2
@@ -28,9 +54,4 @@ public class ConsultVO extends CreationVO {
   private Integer mindScore;         // 수강의지 점수
   private Integer jobScore;          // 취업역량 점수
   private Integer totalScore;        // 점수 합
-
-  private StuVO stuVO;
-  private StaffVO staffVO;
-  private ClassInfoVO classInfoVO;
-
 }

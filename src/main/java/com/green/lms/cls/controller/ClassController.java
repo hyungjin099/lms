@@ -2,6 +2,7 @@ package com.green.lms.cls.controller;
 
 import com.green.lms.cls.service.ClassService;
 import com.green.lms.cls.vo.ClassOperInfoVO;
+import com.green.lms.cls.vo.ClassVoForGetConsultList;
 import com.green.lms.cls.vo.ClassVoForInsert;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,18 @@ public class ClassController {
       return ResponseEntity.status(HttpStatus.OK).body(list);
     }catch (Exception e){
       log.error("ClassController - getClassListRecruiting", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+  //모집중인 과정 + 상담 목록 조회 API
+  @GetMapping("/consult-list")
+  public ResponseEntity<?> getClassAndConsultList(){
+    try{
+      List<ClassVoForGetConsultList> list = classService.selectClassAndConsultList();
+      return ResponseEntity.status(HttpStatus.OK).body(list);
+    }catch (Exception e){
+      log.error("ClassController - getClassAndConsultList", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
