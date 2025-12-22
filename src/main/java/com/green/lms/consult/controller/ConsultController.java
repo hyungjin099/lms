@@ -54,6 +54,20 @@ public class ConsultController {
     }
   }
 
+  //상담 내용 수정
+  @PutMapping("/{consultNum}")
+  public ResponseEntity<?> updateConsultInfo(@PathVariable("consultNum") int consultNum , @RequestBody ConsultVO consultVO){
+    try{
+      consultVO.setConsultNum(consultNum);
+      System.out.println(consultVO);
+      consultService.updateConsultInfo(consultVO);
+      return ResponseEntity.status(HttpStatus.OK).build();
+    }catch (Exception e){
+      log.error("ConsultController - updateConsultInfo error", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
 
 
 

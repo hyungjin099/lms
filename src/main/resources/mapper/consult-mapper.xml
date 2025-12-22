@@ -31,6 +31,38 @@
     <association property="classInfoVO" resultMap="com.green.lms.cls.mapper.ClassMapper.classInfoMap" />
   </resultMap>
 
+  <!--상담 내용 수정-->
+  <update id="updateConsultInfo">
+    UPDATE CONSULT_INFO
+    <set>
+      <if test="managerNum != null">
+        MANAGER_NUM = #{managerNum},
+      </if>
+      <if test="classNum != null">
+        CLASS_NUM = #{classNum},
+      </if>
+      <if test="supportType != null">
+        SUPPORT_TYPE = #{supportType},
+      </if>
+      <if test="consultGrade != null">
+        CONSULT_GRADE = #{consultGrade},
+      </if>
+      <if test="consultType != null">
+        CONSULT_TYPE = #{consultType},
+      </if>
+      <if test="hrdStatus != null">
+        HRD_STATUS = #{hrdStatus},
+      </if>
+      <if test="consultContent != null">
+        CONSULT_CONTENT = #{consultContent},
+      </if>
+      <if test="consultStatus != null">
+        CONSULT_STATUS = #{consultStatus},
+      </if>
+    </set>
+    WHERE CONSULT_NUM = #{consultNum}
+  </update>
+
   <insert id="insertConsult">
     INSERT INTO CONSULT_INFO (
       STU_NUM

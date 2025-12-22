@@ -16,4 +16,7 @@ public interface ConsultMapper {
 
   //동일 학생이 한 과정에 중복 상담 체크인지 확인
   String checkDuplicateConsult(ConsultVoForInsertStu consultVoForInsertStu);
+
+  //상담 내용 수정
+  void updateConsultInfo(ConsultVO consultVO);
 }

@@ -51,4 +51,9 @@ public class ConsultService {
     return result == null;
   }
 
+  //상담 내용 수정
+  public void updateConsultInfo(ConsultVO consultVO){
+    consultMapper.updateConsultInfo(consultVO);
+  }
+
 }
