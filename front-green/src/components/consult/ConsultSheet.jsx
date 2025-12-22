@@ -28,7 +28,7 @@ const ConsultSheet = ({consultList, refreshConsultList, stompClient, userName}) 
   const [editingCell, setEditingCell] = useState(null);
   const [selectedCell, setSelectedCell] = useState(null);
   const [columnWidths, setColumnWidths] = useState([]);
-  const [rowHeights, setRowHeights] = useState({});
+  const [rowHeights, setRowHeights] = useState([40, 40, 40, 40, 200, 40]);
   const [resizing, setResizing] = useState(null);
   
   // 편집 중인 셀의 위치와 크기 정보
@@ -350,11 +350,12 @@ const ConsultSheet = ({consultList, refreshConsultList, stompClient, userName}) 
       } else if (resizing.type === 'row') {
         const diff = e.clientY - resizeStartPos.current;
         const newHeight = Math.max(30, resizeStartSize.current + diff);
-        
-        setRowHeights(prev => ({
-          ...prev,
-          [resizing.index]: newHeight
-        }));
+
+        setRowHeights(prev => {
+          const newHeights = [...prev];
+          newHeights[resizing.index] = newHeight;
+          return newHeights;
+        });
       }
     };
 
@@ -1005,25 +1006,9 @@ const ConsultSheet = ({consultList, refreshConsultList, stompClient, userName}) 
           </>
         ) : (
           // 일반 보기 모드
-          <div
-            className={styles.cellContent}
-            style={{
-              height: '100%',
-              maxHeight: '100%',
-              overflow: 'hidden',
-              padding: '8px 12px',
-              boxSizing: 'border-box'
-            }}
-          >
+          <div className={styles.cellContent}>
             <div
               className={styles.cellText}
-              style={{
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                display: '-webkit-box',
-                WebkitLineClamp: Math.floor((rowHeights[rowIndex] || 40) / 24), // 대략 줄 수 계산
-                WebkitBoxOrient: 'vertical'
-              }}
               dangerouslySetInnerHTML={{
                 __html: value || '\u00A0'
               }}
@@ -1032,15 +1017,7 @@ const ConsultSheet = ({consultList, refreshConsultList, stompClient, userName}) 
         )
       ) : isDualSelectRow ? (
         // ========== 구분 / 등급 행 ==========
-        <div
-          className={styles.dualSelectContainer}
-          style={{
-            height: '100%',
-            maxHeight: '100%',
-            overflow: 'hidden',
-            boxSizing: 'border-box'
-          }}
-        >
+        <div className={styles.dualSelectContainer}>
           <select
             value={value.split(' / ')[0] || ''}
             onChange={(e) => {
@@ -1075,17 +1052,7 @@ const ConsultSheet = ({consultList, refreshConsultList, stompClient, userName}) 
         </div>
       ) : (
         // ========== 다른 행: 단일 select ==========
-        <div
-          style={{
-            height: '100%',
-            maxHeight: '100%',
-            overflow: 'hidden',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxSizing: 'border-box'
-          }}
-        >
+        <div className={styles.cellSelectWrapper}>
           <select
             value={value}
             onChange={(e) => handleCellBlur(rowIndex, colIndex, e.target.value)}
@@ -1163,8 +1130,7 @@ const ConsultSheet = ({consultList, refreshConsultList, stompClient, userName}) 
                   <tr
                     key={rowIndex}
                     style={{
-                      height: rowHeights[rowIndex] || 40,
-                      maxHeight: rowHeights[rowIndex] || 40
+                      height: rowHeights[rowIndex] || 40
                     }}
                   >
                     <td

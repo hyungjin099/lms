@@ -35,7 +35,7 @@
 }
 
 .table tbody tr {
-  height: 40px; /* 기본 행 높이 */
+  /* inline style의 height가 우선되도록 !important 제거 */
 }
 
 .table thead {
@@ -83,10 +83,8 @@
   background: white;
   cursor: pointer;
   position: relative;
-  vertical-align: top; /* middle에서 top으로 변경 */
+  vertical-align: middle;
   max-width: 0;
-  box-sizing: border-box; /* 패딩과 보더를 높이에 포함 */
-  overflow: hidden; /* 내용이 넘치면 숨김 */
 }
 
 .cell:hover {
@@ -149,14 +147,12 @@
 .cellContent {
   padding: 8px 12px;
   height: 100%;
-  max-height: 100%; /* 부모 셀 높이를 넘지 않도록 */
   display: flex;
   align-items: center;
   min-width: 0;
   width: 100%;
   justify-content: center;
   overflow: hidden;
-  box-sizing: border-box; /* 패딩을 높이에 포함 */
 }
 
 /* 실제 텍스트를 담는 요소 - 기본값 */
@@ -171,54 +167,26 @@
   line-height: 1.5;
 }
 
-/* ========== 상담내용 셀 전용 스타일 (나중에 정의해서 기본값 override) ========== */
+/* ========== 상담내용 셀 전용 스타일 ========== */
 
 /* 상담내용 셀의 cellContent */
 .cell.contentCell .cellContent {
-  align-items: flex-start !important;
-  justify-content: flex-start !important;
-  overflow: hidden !important;
-  height: 100% !important;
-  max-height: 100% !important;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
-/* 상담내용 셀의 cellText - 컨테이너 */
+/* 상담내용 셀의 cellText */
 .cell.contentCell .cellText {
-  display: block !important;
-  text-align: left !important;
-  overflow: hidden !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-height: 100% !important;
-  white-space: pre !important;  /* 자동 줄바꿈 금지, \n만 줄바꿈 */
-}
-
-/* contentEditable에서 생성된 각 div (한 줄씩) - 핵심! */
-.cell.contentCell .cellText > div {
-  white-space: nowrap !important;
-  overflow: hidden !important;
-}
-
-/* div 없이 직접 텍스트가 있는 경우 (첫 줄) */
-/* .cell.contentCell .cellText {
-  line-height: 1.5;
-} */
-
-/* br 태그 처리 */
-/* .cell.contentCell .cellText br {
   display: block;
-} */
+  text-align: left;
+  white-space: normal;
+  word-wrap: break-word;
+}
 
 /* 굵게 스타일 */
 .cell.contentCell .cellText b,
 .cell.contentCell .cellText strong {
   font-weight: 700;
-}
-
-/* span, font 등은 inline 유지 */
-.cell.contentCell .cellText span,
-.cell.contentCell .cellText font {
-  display: inline !important;
 }
 
 /* ========== 셀 내부 input (담당자, 상담일시) - 확장 없음 ========== */
@@ -237,6 +205,13 @@
 }
 
 /* ========== 셀 내부 select 스타일 ========== */
+
+.cellSelectWrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .cellSelect {
   width: 100%;
