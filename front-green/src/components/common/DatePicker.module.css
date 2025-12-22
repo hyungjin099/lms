@@ -1,0 +1,166 @@
+/* BasicDatePicker.module.css */
+.inputGroup {
+  width: 100%;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #424549;
+}
+
+.required {
+  color: #dc3545;
+  margin-left: 0.25rem;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 2.5rem;
+  font-size: 0.95rem;
+  color: #424549;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  outline: none;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.input:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* 유효성 검사 - 성공 상태 */
+.input.inputValid {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.15);
+}
+
+.input.inputValid:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+/* 유효성 검사 - 에러 상태 */
+.input.inputError {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.15);
+}
+
+.input.inputError:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+/* 캘린더 아이콘 */
+.calendarIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #673de6;
+  pointer-events: none;
+  font-size: 1.125rem;
+  z-index: 1;
+}
+
+/* 유효성 검사 아이콘 */
+.validationIcon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  font-size: 1rem;
+}
+
+.successIcon {
+  color: #198754;
+}
+
+.errorIcon {
+  color: #dc3545;
+}
+
+/* 에러 메시지 */
+.errorMessage {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #dc3545;
+  line-height: 1.25;
+}
+
+/* Flatpickr 커스터마이징 */
+:global(.flatpickr-current-month) {
+  font-size: 0.95rem !important;
+}
+
+:global(.flatpickr-current-month .flatpickr-monthDropdown-months) {
+  font-size: 0.95rem !important;
+}
+
+:global(flatpickr-monthDropdown-month) {
+  font-size: 0.95rem !important;
+  font-weight: 300 !important;
+}
+
+:global(.numInput) {
+  font-size: 0.95rem !important;
+}
+
+:global(.flatpickr-months) {
+  background-color: #673de6 !important;
+}
+
+:global(.flatpickr-month) {
+  background-color: #673de6 !important;
+}
+
+:global(.flatpickr-current-month) {
+  color: #ffffff !important;
+}
+
+:global(.flatpickr-current-month .flatpickr-monthDropdown-months) {
+  background-color: #673de6 !important;
+  color: #ffffff !important;
+}
+
+:global(.numInput) {
+  color: #ffffff !important;
+}
+
+:global(.flatpickr-prev-month),
+:global(.flatpickr-next-month) {
+  fill: #ffffff !important;
+}
+
+:global(.flatpickr-prev-month svg),
+:global(.flatpickr-next-month svg) {
+  fill: #ffffff !important;
+}
+
+:global(.flatpickr-weekdaycontainer){
+  background-color: #673de6 !important;
+}
+
+:global(.flatpickr-weekdays) {
+  background-color: #673de6 !important;
+}
+
+:global(.flatpickr-weekday) {
+  color: #ffffff !important;
+  background-color: #673de6 !important;
+}

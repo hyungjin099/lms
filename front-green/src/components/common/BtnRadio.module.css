@@ -1,0 +1,163 @@
+.radioButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.2rem 0.6rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  width: auto;
+}
+
+.radioButton.checked {
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.radioButton.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* readOnly는 클릭만 막고 디자인은 유지 */
+.radioButton.readOnly {
+  cursor: default;
+  pointer-events: none;
+}
+
+.label {
+  font-size: 0.85rem;
+  color: inherit;
+  transform: translateY(1px);
+}
+
+.hiddenRadio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radiomark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  margin-right: 0.3rem;
+  flex-shrink: 0;
+}
+
+.radioButton.checked .radiomark {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+.radioDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* 초록색 */
+.green {
+  background: #ffffff;
+  border-color: #92d781;
+}
+
+.green.checked {
+  background: #d9fbd0;
+  border-color: #92d781;
+}
+
+.green.checked .radiomark {
+  color: #3a6c09;
+}
+
+.green.checked .label {
+  color: #3a6c09;
+}
+
+/* 파란색 */
+.blue {
+  background: #ffffff;
+  border-color: #88abff;
+}
+
+.blue.checked {
+  background: #e5edff;
+  border-color: #88abff;
+}
+
+.blue.checked .radiomark {
+  color: #1e3cc7;
+}
+
+.blue.checked .label {
+  color: #1e3cc7;
+}
+
+/* 노란색 */
+.yellow {
+  background: #ffffff;
+  border-color: #ffcd87;
+}
+
+.yellow.checked {
+  background: #ffefca;
+  border-color: #ffcd87;
+}
+
+.yellow.checked .radiomark {
+  color: #bc4716;
+}
+
+.yellow.checked .label {
+  color: #bc4716;
+}
+
+/* 보라색 */
+.purple {
+  background: #ffffff;
+  border-color: #9062fa;
+}
+
+.purple.checked {
+  background: #d1bdff;
+  border-color: #9062fa;
+}
+
+.purple.checked .radiomark {
+  color: #4c0fdb;
+}
+
+.purple.checked .label {
+  color: #4c0fdb;
+}
+
+/* 빨간색 */
+.red {
+  background: #ffffff;
+  border-color: #f48573;
+}
+
+.red.checked {
+  background: #ffe0db;
+  border-color: #f48573;
+}
+
+.red.checked .radiomark {
+  color: #d13b00;
+}
+
+.red.checked .label {
+  color: #d13b00;
+}

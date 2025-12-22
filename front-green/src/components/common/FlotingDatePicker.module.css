@@ -1,0 +1,178 @@
+/* DatePicker.module.css */
+.inputGroup {
+  position: relative;
+  width: 100%;
+  /* margin-bottom: 1rem; */
+}
+
+.input {
+  width: 100%;
+  padding: 1.5rem 0.9rem 0.3rem 2.2rem;
+  font-size: 0.9rem;
+  color: #424549;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  outline: none;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.input:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* 유효성 검사 - 성공 상태 */
+.input.inputValid {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.15);
+}
+
+.input.inputValid:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+/* 유효성 검사 - 에러 상태 */
+.input.inputError {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.15);
+}
+
+.input.inputError:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+.label {
+  position: absolute;
+  top: 1rem;
+  transform: translateY(-1px);
+  left: 2rem;
+  font-size: 0.9rem;
+  color: rgb(100, 100, 100);
+  pointer-events: none;
+  background-color: #fff;
+  padding: 0 0.25rem;
+  transition: all 0.1s ease;
+}
+
+.input:focus + .label,
+.input:not(:placeholder-shown) + .label {
+  top: 0.2rem;
+  font-size: 0.8rem;
+  color: #673de6;
+}
+
+/* 라벨 유효성 검사 색상 */
+.input:focus + .labelValid,
+.input:not(:placeholder-shown) + .labelValid {
+  color: #198754;
+}
+
+.input:focus + .labelError,
+.input:not(:placeholder-shown) + .labelError {
+  color: #dc3545;
+}
+
+.calendarIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 1.5rem;
+  transform: translateY(-50%);
+  color: #64748b;
+  pointer-events: none;
+  font-size: 18px;
+  color: #673de6;
+}
+
+/* 유효성 검사 아이콘 */
+.validationIcon {
+  position: absolute;
+  right: 1rem;
+  top: 1.5rem;
+  transform: translateY(-55%);
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+}
+
+.successIcon {
+  color: #198754;
+}
+
+.errorIcon {
+  color: #dc3545;
+}
+
+/* 에러 메시지 */
+.errorMessage {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #dc3545;
+  line-height: 1.25;
+}
+
+/* 기존 Flatpickr 스타일들... */
+:global(.flatpickr-current-month) {
+  font-size: 0.95rem !important;
+}
+
+:global(.flatpickr-current-month .flatpickr-monthDropdown-months) {
+  font-size: 0.95rem !important;
+}
+
+:global(flatpickr-monthDropdown-month) {
+  font-size: 0.95rem !important;
+  font-weight: 300 !important;
+}
+
+:global(.numInput) {
+  font-size: 0.95rem !important;
+}
+
+:global(.flatpickr-months) {
+  background-color: #673de6 !important;
+}
+
+:global(.flatpickr-month) {
+  background-color: #673de6 !important;
+}
+
+:global(.flatpickr-current-month) {
+  color: #ffffff !important;
+}
+
+:global(.flatpickr-current-month .flatpickr-monthDropdown-months) {
+  background-color: #673de6 !important;
+  color: #ffffff !important;
+}
+
+:global(.numInput) {
+  color: #ffffff !important;
+}
+
+:global(.flatpickr-prev-month),
+:global(.flatpickr-next-month) {
+  fill: #ffffff !important;
+}
+
+:global(.flatpickr-prev-month svg),
+:global(.flatpickr-next-month svg) {
+  fill: #ffffff !important;
+}
+
+:global(.flatpickr-weekdaycontainer){
+  background-color: #673de6 !important;
+}
+:global(.flatpickr-weekdays) {
+  background-color: #673de6 !important;
+}
+
+:global(.flatpickr-weekday) {
+  color: #ffffff !important;
+  background-color: #673de6 !important;
+}

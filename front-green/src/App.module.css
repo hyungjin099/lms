@@ -1,0 +1,39 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* background-color: #f9fafd;  */
+  min-height: 900px;
+}
+
+/* 레이아웃 바디 */
+.layoutBody {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 컨텐츠 영역 */
+.content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  /* background-color: #f9fafd; */
+  transition: all 0.3s ease;
+  min-width: 0;
+
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    height: calc(100vh - 60px);
+    z-index: 50;
+  }
+  
+  .sidebar.closed {
+    width: 0;
+  }
+}
